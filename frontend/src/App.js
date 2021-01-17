@@ -11,9 +11,12 @@ function App() {
   const [nominated, setNominated] = useState([]);
   const [nomId, setNomId] = useState([]);
 
-  const handleNominate = (movie, id) => {
-    setNominated(nominated.concat({ title: movie, id: id }));
-    setNomId(nomId.concat(id));
+  const handleNominate = (movie, id, year) => {
+    // limit nominations to 5 selections only
+    if (nominated.length < 5) {
+      setNominated(nominated.concat({ title: movie, id, year }));
+      setNomId(nomId.concat(id));
+    }
   };
   const removeNominate = (title, id) => {
     setNominated(nominated.filter((movie) => movie.title !== title));
@@ -42,9 +45,11 @@ function App() {
         });
     }
   };
+  // render whenever search bar is being used
   useEffect(() => {
     getMovies(title);
   }, [title]);
+
   return (
     <div className="App">
       <Header />

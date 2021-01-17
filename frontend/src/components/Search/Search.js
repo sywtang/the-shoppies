@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+// Search bar to enter text
 const Search = ({ handleValue }) => {
   const [text, setText] = useState("");
 

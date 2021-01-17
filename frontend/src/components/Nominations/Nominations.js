@@ -1,5 +1,6 @@
 import NominateButton from "../NominateButton/NominateButton";
 
+// Render movies array containing the nominations from MoviesList
 const Nominations = ({ movies, removeNominate }) => {
   const renderList = () => {
     const isMoviesValid = movies.length > 0 && movies[0] !== undefined;
@@ -7,7 +8,7 @@ const Nominations = ({ movies, removeNominate }) => {
       return movies.map((movie) => {
         return (
           <li key={Math.random()} className="nominations__item">
-            {movie.title}
+            {movie.title} ({movie.year})
             <NominateButton
               title={movie.title}
               removeNominate={removeNominate}

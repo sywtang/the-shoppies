@@ -1,6 +1,8 @@
+// Button for adding and removing nominations
 const NominateButton = ({
   title,
   id,
+  year,
   handleNominate,
   removeNominate,
   text,
@@ -8,7 +10,7 @@ const NominateButton = ({
 }) => {
   const handleSelect = () => {
     if (text === "Nominate") {
-      handleNominate(title, id);
+      handleNominate(title, id, year);
     } else if (text === "Remove") {
       removeNominate(title, id);
     }

@@ -1,6 +1,6 @@
 import NominateButton from "../NominateButton/NominateButton";
 
-// Component that makes the API call and renders the results in a list
+// Renders movies from title search prop
 const MoviesList = ({ movies, title, selectedMovie, handleNominate }) => {
   const showMovies = () => {
     const isMoviesValid = movies.length > 0 && movies[0] !== undefined;
@@ -13,6 +13,7 @@ const MoviesList = ({ movies, title, selectedMovie, handleNominate }) => {
               <NominateButton
                 id={movie.imdbID}
                 title={movie.Title}
+                year={movie.Year}
                 handleNominate={handleNominate}
                 text="Nominate"
                 status={false}
