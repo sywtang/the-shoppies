@@ -1,29 +1,7 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
 import NominateButton from "../NominateButton/NominateButton";
 
 // Component that makes the API call and renders the results in a list
-const MoviesList = ({ title, handleNominate }) => {
-  const [movies, setMovies] = useState(null);
-
-  const getMovies = (input) => {
-    if (input) {
-      axios
-        .get(
-          process.env.REACT_APP_URL +
-            input +
-            "&apikey=" +
-            process.env.REACT_APP_API_KEY
-        )
-        .then((response) => {
-          const results = response.data.Search;
-          setMovies([results]);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    }
-  };
+const MoviesList = ({ movies, title, selectedMovie, handleNominate }) => {
   const showMovies = () => {
     const isMoviesValid = movies.length > 0 && movies[0] !== undefined;
     if (isMoviesValid) {
@@ -31,20 +9,29 @@ const MoviesList = ({ title, handleNominate }) => {
         return (
           <li key={movie.imdbID} className="movies__item">
             {movie.Title} ({movie.Year})
-            <NominateButton
-              title={movie.Title}
-              handleNominate={handleNominate}
-              text="Nominate"
-            />
+            {!selectedMovie.includes(movie.imdbID) ? (
+              <NominateButton
+                id={movie.imdbID}
+                title={movie.Title}
+                handleNominate={handleNominate}
+                text="Nominate"
+                status={false}
+              />
+            ) : (
+              <NominateButton
+                id={movie.imdbID}
+                title={movie.Title}
+                handleNominate={handleNominate}
+                text="Nominate"
+                status={true}
+              />
+            )}
           </li>
         );
       });
     }
   };
 
-  useEffect(() => {
-    getMovies(title);
-  }, [title]);
   return (
     <section className="movies">
       <h2 className="movies__title">Results for "{title}"</h2>
