@@ -1,8 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import NominateButton from "../NominateButton/NominateButton";
 
 // Component that makes the API call and renders the results in a list
-const MoviesList = ({ title }) => {
+const MoviesList = ({ title, handleNominate }) => {
   const [movies, setMovies] = useState(null);
 
   const getMovies = (input) => {
@@ -27,7 +28,16 @@ const MoviesList = ({ title }) => {
     const isMoviesValid = movies.length > 0 && movies[0] !== undefined;
     if (isMoviesValid) {
       return movies[0].map((movie) => {
-        return <li key={movie.imdbID}>{movie.Title}</li>;
+        return (
+          <li key={movie.imdbID} className="movies__item">
+            {movie.Title} ({movie.Year})
+            <NominateButton
+              title={movie.Title}
+              handleNominate={handleNominate}
+              text="Nominate"
+            />
+          </li>
+        );
       });
     }
   };
