@@ -1,3 +1,4 @@
+import { Button } from "@chakra-ui/react";
 // Button for adding and removing nominations
 const NominateButton = ({
   title,
@@ -16,13 +17,15 @@ const NominateButton = ({
     }
   };
   return (
-    <button
+    <Button
+      colorScheme="blue"
       className="movies__nominate"
       onClick={handleSelect}
       disabled={status}
+      size="sm"
     >
       {text}
-    </button>
+    </Button>
   );
 };
 

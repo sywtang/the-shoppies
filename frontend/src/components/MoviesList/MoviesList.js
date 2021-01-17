@@ -1,3 +1,10 @@
+import {
+  Box,
+  Container,
+  Heading,
+  ListItem,
+  UnorderedList,
+} from "@chakra-ui/react";
 import NominateButton from "../NominateButton/NominateButton";
 
 // Renders movies from title search prop
@@ -7,8 +14,8 @@ const MoviesList = ({ movies, title, selectedMovie, handleNominate }) => {
     if (isMoviesValid) {
       return movies[0].map((movie) => {
         return (
-          <li key={movie.imdbID} className="movies__item">
-            {movie.Title} ({movie.Year})
+          <ListItem key={movie.imdbID}>
+            {movie.Title} ({movie.Year}){" "}
             {!selectedMovie.includes(movie.imdbID) ? (
               <NominateButton
                 id={movie.imdbID}
@@ -27,17 +34,27 @@ const MoviesList = ({ movies, title, selectedMovie, handleNominate }) => {
                 status={true}
               />
             )}
-          </li>
+          </ListItem>
         );
       });
     }
   };
 
   return (
-    <section className="movies">
-      <h2 className="movies__title">Results for "{title}"</h2>
-      {movies !== null ? <ul>{showMovies()}</ul> : ""}
-    </section>
+    <Container>
+      <Box width="100%">
+        <section className="movies">
+          <Heading as="h2" fontSize={{ sm: "24px", md: "30px", lg: "36px" }}>
+            Results for "{title}"
+          </Heading>
+          {movies !== null ? (
+            <UnorderedList spacing={5}>{showMovies()}</UnorderedList>
+          ) : (
+            ""
+          )}
+        </section>
+      </Box>
+    </Container>
   );
 };
 

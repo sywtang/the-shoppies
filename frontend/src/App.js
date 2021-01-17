@@ -5,6 +5,7 @@ import Header from "./components/Header/Header";
 import MoviesList from "./components/MoviesList/MoviesList";
 import Nominations from "./components/Nominations/Nominations";
 import Search from "./components/Search/Search";
+import { Box, Flex } from "@chakra-ui/react";
 
 function App() {
   const [title, setTitle] = useState("");
@@ -52,19 +53,30 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
-      <Search handleValue={handleValue} />
-      <MoviesList
-        movies={movies}
-        title={title}
-        selectedMovie={nomId}
-        handleNominate={handleNominate}
-      />
-      <Nominations
-        movies={nominated}
-        selectedMovie={nomId}
-        removeNominate={removeNominate}
-      />
+      <Box padding="25px">
+        <Flex
+          direction="column"
+          width="100%"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Header />
+          <Search handleValue={handleValue} />
+        </Flex>
+        <Flex direction={["column", "row"]} width="100%">
+          <MoviesList
+            movies={movies}
+            title={title}
+            selectedMovie={nomId}
+            handleNominate={handleNominate}
+          />
+          <Nominations
+            movies={nominated}
+            selectedMovie={nomId}
+            removeNominate={removeNominate}
+          />
+        </Flex>
+      </Box>
     </div>
   );
 }

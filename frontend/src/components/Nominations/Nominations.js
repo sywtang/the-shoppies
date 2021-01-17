@@ -1,3 +1,10 @@
+import {
+  Box,
+  Container,
+  Heading,
+  ListItem,
+  UnorderedList,
+} from "@chakra-ui/react";
 import NominateButton from "../NominateButton/NominateButton";
 
 // Render movies array containing the nominations from MoviesList
@@ -7,29 +14,35 @@ const Nominations = ({ movies, removeNominate }) => {
     if (isMoviesValid) {
       return movies.map((movie) => {
         return (
-          <li key={Math.random()} className="nominations__item">
-            {movie.title} ({movie.year})
+          <ListItem key={Math.random()}>
+            {movie.title} ({movie.year}){" "}
             <NominateButton
               title={movie.title}
               removeNominate={removeNominate}
               text="Remove"
               id={movie.id}
             />
-          </li>
+          </ListItem>
         );
       });
     }
   };
 
   return (
-    <section className="nominations">
-      <h2 className="nominations__heading">Nominations</h2>
-      {movies !== null ? (
-        <ul className="nominations__list">{renderList()}</ul>
-      ) : (
-        ""
-      )}
-    </section>
+    <Container>
+      <Box w="100%">
+        <section className="nominations">
+          <Heading as="h2" fontSize={{ sm: "24px", md: "30px", lg: "36px" }}>
+            Nominations
+          </Heading>
+          {movies !== null ? (
+            <UnorderedList spacing={5}>{renderList()}</UnorderedList>
+          ) : (
+            ""
+          )}
+        </section>
+      </Box>
+    </Container>
   );
 };
 

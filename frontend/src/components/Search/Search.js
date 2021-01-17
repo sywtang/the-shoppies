@@ -1,3 +1,11 @@
+import { SearchIcon } from "@chakra-ui/icons";
+import {
+  Box,
+  FormLabel,
+  Input,
+  InputGroup,
+  InputLeftElement,
+} from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
 // Search bar to enter text
@@ -14,16 +22,21 @@ const Search = ({ handleValue }) => {
   }, [text, handleValue]);
 
   return (
-    <form className="movie-form" onSubmit={(event) => event.preventDefault()}>
-      <label className="movie-form__title">Movie title</label>
-      <input
-        className="movie-form__input"
-        name="search"
-        type="text"
-        value={text}
-        onChange={(event) => handleChange(event)}
-      />
-    </form>
+    <Box width="100%">
+      <form onSubmit={(event) => event.preventDefault()}>
+        <FormLabel> Movie title</FormLabel>
+        <InputGroup>
+          <InputLeftElement pointerEvents="none" children={<SearchIcon />} />
+          <Input
+            className="movie-form__input"
+            name="search"
+            type="text"
+            value={text}
+            onChange={(event) => handleChange(event)}
+          />
+        </InputGroup>
+      </form>
+    </Box>
   );
 };
 
