@@ -3,14 +3,16 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import { ChakraProvider, ColorModeScript } from "@chakra-ui/react";
+import { Box, ChakraProvider, ColorModeScript } from "@chakra-ui/react";
 import theme from "./theme/theme";
 
 ReactDOM.render(
   <React.StrictMode>
     <ChakraProvider>
-      <ColorModeScript initialColorMode={theme.config.initialColorMode} />
-      <App />
+      <Box padding="20px" height="100%">
+        <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+        <App />
+      </Box>
     </ChakraProvider>
   </React.StrictMode>,
   document.getElementById("root")

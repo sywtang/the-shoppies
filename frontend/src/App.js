@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from "react";
-import "./App.scss";
 import axios from "axios";
 import Header from "./components/Header/Header";
 import MoviesList from "./components/MoviesList/MoviesList";
 import Nominations from "./components/Nominations/Nominations";
 import Search from "./components/Search/Search";
 import { Box, Flex } from "@chakra-ui/react";
+import NominateModal from "./components/Modal/Modal";
 
 function App() {
   const [title, setTitle] = useState("");
   const [nominated, setNominated] = useState([]);
   const [nomId, setNomId] = useState([]);
 
-  const handleNominate = (movie, id, year) => {
+  const handleNominate = (movie, id, year, poster) => {
     // limit nominations to 5 selections only
     if (nominated.length < 5) {
-      setNominated(nominated.concat({ title: movie, id, year }));
+      setNominated(nominated.concat({ title: movie, id, year, poster }));
       setNomId(nomId.concat(id));
     }
   };
@@ -39,6 +39,7 @@ function App() {
         )
         .then((response) => {
           const results = response.data.Search;
+          console.log(results);
           setMovies([results]);
         })
         .catch((error) => {
@@ -53,7 +54,15 @@ function App() {
 
   return (
     <div className="App">
-      <Box padding="25px">
+      <Box
+        padding={{ md: "45px" }}
+        bgGradient={[
+          "linear(to-tr, teal.400,yellow.600)",
+          "linear(to-t, blue.400, teal.300)",
+          "linear(to-b, orange.400, purple.700)",
+        ]}
+        rounded="md"
+      >
         <Flex
           direction="column"
           width="100%"
@@ -61,6 +70,7 @@ function App() {
           justifyContent="center"
         >
           <Header />
+          {nominated.length === 5 && <NominateModal nominations={nominated} />}
           <Search handleValue={handleValue} />
         </Flex>
         <Flex direction={["column", "row"]} width="100%">

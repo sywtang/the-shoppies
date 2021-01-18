@@ -8,9 +8,23 @@ const breakpoints = createBreakpoints({
   xl: "1200px",
 });
 const config = {
-  initialColorMode: "light",
+  initialColorMode: "dark",
   useSystemColorMode: false,
 };
+const themeConfig = {
+  styles: {
+    global: {
+      "html, body": {
+        fontSize: "lg",
+        background: "blue.200",
+      },
+    },
+  },
+};
 
-const theme = extendTheme({ config, breakpoints });
+const theme = extendTheme({
+  config,
+  breakpoints,
+  themeConfig,
+});
 export default theme;
